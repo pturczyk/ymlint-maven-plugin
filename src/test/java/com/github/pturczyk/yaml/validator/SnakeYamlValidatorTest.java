@@ -1,6 +1,5 @@
-package com.github.pturczyk.yaml.validator.snake;
+package com.github.pturczyk.yaml.validator;
 
-import com.github.pturczyk.yaml.validator.ValidationException;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 

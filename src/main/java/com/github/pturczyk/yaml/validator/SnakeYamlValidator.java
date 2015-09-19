@@ -1,7 +1,5 @@
-package com.github.pturczyk.yaml.validator.snake;
+package com.github.pturczyk.yaml.validator;
 
-import com.github.pturczyk.yaml.validator.ValidationException;
-import com.github.pturczyk.yaml.validator.YamlValidator;
 import org.yaml.snakeyaml.composer.Composer;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
 import org.yaml.snakeyaml.parser.ParserImpl;

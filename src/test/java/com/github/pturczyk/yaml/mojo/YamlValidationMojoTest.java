@@ -1,4 +1,4 @@
-package com.github.pturczyk.yaml;
+package com.github.pturczyk.yaml.mojo;
 
 import com.github.pturczyk.yaml.util.YamlFileUtils;
 import com.github.pturczyk.yaml.validator.ValidationException;
