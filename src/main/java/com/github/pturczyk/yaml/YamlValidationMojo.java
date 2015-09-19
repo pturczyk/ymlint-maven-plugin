@@ -19,7 +19,7 @@ import java.util.List;
  * @author pturczyk@gmail.com
  */
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE)
-public class YamlMojo extends AbstractMojo {
+public class YamlValidationMojo extends AbstractMojo {
 
     /**
      * Paths to YAML files. If the path points to a directory, the directory will be
@@ -29,13 +29,13 @@ public class YamlMojo extends AbstractMojo {
     private List<String> yamlPaths;
 
     /**
-     * Tells whether build should continue in case of validation errors. By default its set to true.
+     * Tells whether build should continue in case of validator errors. By default its set to true.
      */
     @Parameter(property = "failOnError", defaultValue = "true")
     private boolean failOnError;
 
     @Inject
-    private YamlValidator yamlLint;
+    private YamlValidator validator;
 
     @Override
     public void execute() throws MojoFailureException {
@@ -47,7 +47,7 @@ public class YamlMojo extends AbstractMojo {
 
     private void validate(String yamlFile) throws MojoFailureException {
         try {
-            yamlLint.validate(yamlFile);
+            validator.validate(yamlFile);
         } catch (ValidationException | IOException e) {
             logError(yamlFile, e);
             failIfRequired(e);
@@ -55,14 +55,14 @@ public class YamlMojo extends AbstractMojo {
     }
 
     private void logError(String yamlFile, Exception exception) {
-        String error = String.format("'%s' validation failed: %s", yamlFile, exception.getMessage());
+        String error = String.format("'%s' validator failed: %s", yamlFile, exception.getMessage());
         getLog().error(error);
         getLog().debug(error, exception);
     }
 
     private void failIfRequired(Exception e) throws MojoFailureException {
         if (failOnError) {
-            throw new MojoFailureException("YAML validation failed", e);
+            throw new MojoFailureException("YAML validator failed", e);
         }
     }
 
