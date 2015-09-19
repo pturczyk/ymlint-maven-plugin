@@ -1,6 +1,7 @@
 package com.github.pturczyk.yaml.validator;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * YAML file validator
@@ -9,12 +10,12 @@ import java.io.IOException;
  */
 public interface YamlValidator {
     /**
-     * Validates the provided YAML file
+     * Validates the provided yaml stream
      *
-     * @param yamlPath path to YAML file to validate
+     * @param inputStream yaml stream
      *
      * @throws ValidationException   when validation fails
-     * @throws IOException if any problem occurs while reading YAML file
+     * @throws IOException if any problem occurs while reading the input stream
      */
-    void validate(String yamlPath) throws ValidationException, IOException;
+    void validate(InputStream inputStream) throws ValidationException, IOException;
 }

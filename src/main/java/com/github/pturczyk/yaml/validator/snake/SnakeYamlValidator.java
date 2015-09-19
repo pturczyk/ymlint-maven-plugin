@@ -9,27 +9,24 @@ import org.yaml.snakeyaml.reader.StreamReader;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 import org.yaml.snakeyaml.resolver.Resolver;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * YAML validator implementation based on the Snake YAML Library.
  *
  * @author pturczyk@gmail.com
  */
+@Named
 @Singleton
 public class SnakeYamlValidator implements YamlValidator {
 
     @Override
-    public void validate(String yamlPath) throws ValidationException, IOException {
-        try (FileInputStream YamlReader = new FileInputStream(yamlPath)) {
-
-            StreamReader streamReader = new StreamReader(new UnicodeReader(YamlReader));
-            Composer composer = new Composer(new ParserImpl(streamReader), new Resolver());
-
-            doValidate(composer);
-        }
+    public void validate(InputStream yamlStream) throws ValidationException {
+        StreamReader streamReader = new StreamReader(new UnicodeReader(yamlStream));
+        Composer composer = new Composer(new ParserImpl(streamReader), new Resolver());
+        doValidate(composer);
     }
 
     private void doValidate(Composer composer) throws ValidationException {

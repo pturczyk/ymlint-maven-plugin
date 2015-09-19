@@ -11,14 +11,15 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.util.Set;
 
 /**
- * YAML validating mojo
+ * YAML validating MOJO
  *
  * @author pturczyk@gmail.com
  */
-@Mojo(name = "check", defaultPhase = LifecyclePhase.VALIDATE)
+@Mojo(name = "check", defaultPhase = LifecyclePhase.VALIDATE, requiresProject = false)
 public class YamlValidationMojo extends AbstractMojo {
 
     /**
@@ -26,7 +27,7 @@ public class YamlValidationMojo extends AbstractMojo {
      * recursively scanned for YAML files. By default plugin will scan the current directory.
      */
     @Parameter(property = "yamlPaths", defaultValue = ".")
-    private List<String> yamlPaths;
+    private Set<String> yamlPaths;
 
     /**
      * Tells whether build should continue in case of validator errors. By default its set to true.
@@ -37,25 +38,28 @@ public class YamlValidationMojo extends AbstractMojo {
     @Inject
     private YamlValidator validator;
 
+    @Inject
+    private YamlFileUtils fileUtils;
+
     @Override
     public void execute() throws MojoFailureException {
-        for (String yamlFile : YamlFileUtils.getFiles(yamlPaths)) {
-            getLog().info("Validating " + yamlFile);
-            validate(yamlFile);
+        for (String yamlFilePath : fileUtils.getAbsoluteFilePaths(yamlPaths)) {
+            getLog().info("Validating " + yamlFilePath);
+            validate(yamlFilePath);
         }
     }
 
-    private void validate(String yamlFile) throws MojoFailureException {
-        try {
-            validator.validate(yamlFile);
+    private void validate(String yamlFilePath) throws MojoFailureException {
+        try (InputStream stream = fileUtils.openStream(yamlFilePath)) {
+            validator.validate(stream);
         } catch (ValidationException | IOException e) {
-            logError(yamlFile, e);
+            logError(yamlFilePath, e);
             failIfRequired(e);
         }
     }
 
-    private void logError(String yamlFile, Exception exception) {
-        String error = String.format("'%s' validator failed: %s", yamlFile, exception.getMessage());
+    private void logError(String yamlFilePath, Exception exception) {
+        String error = String.format("'%s' validator failed: %s", yamlFilePath, exception.getMessage());
         getLog().error(error);
         getLog().debug(error, exception);
     }
