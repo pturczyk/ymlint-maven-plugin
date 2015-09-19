@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author pturczyk@gmail.com
  */
-@Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE)
+@Mojo(name = "check", defaultPhase = LifecyclePhase.VALIDATE)
 public class YamlValidationMojo extends AbstractMojo {
 
     /**
