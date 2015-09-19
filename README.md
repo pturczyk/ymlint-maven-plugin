@@ -1,3 +1,5 @@
+Travis CI [![Build Status](https://travis-ci.org/pturczyk/ymlint-maven-plugin.png?branch=master)](https://travis-ci.org/pturczyk/ymlint-maven-plugin)
+
 # YAML lint maven plugin 
 Performs YAML files validation using the `org.yaml.snakeyaml` library
 
