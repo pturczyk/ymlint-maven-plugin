@@ -30,7 +30,7 @@ public class YamlValidationMojo extends AbstractMojo {
     private Set<String> yamlPaths;
 
     /**
-     * Tells whether build should continue in case of validator errors. By default its set to true.
+     * Tells whether build should fail in case of validator errors. By default its set to true.
      */
     @Parameter(property = "failOnError", defaultValue = "true")
     private boolean failOnError;
