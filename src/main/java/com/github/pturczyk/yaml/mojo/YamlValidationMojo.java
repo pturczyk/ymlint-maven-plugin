@@ -35,6 +35,12 @@ public class YamlValidationMojo extends AbstractMojo {
     @Parameter(property = "failOnError", defaultValue = "true")
     private boolean failOnError;
 
+    /**
+     * Tells whether to use more strict validation failing on duplicate entries.
+     */
+    @Parameter(property = "strictValidation", defaultValue = "false")
+    private boolean strictValidation;
+
     @Inject
     private YamlValidator validator;
 
@@ -51,7 +57,7 @@ public class YamlValidationMojo extends AbstractMojo {
 
     private void validate(String yamlFilePath) throws MojoFailureException {
         try (InputStream stream = fileUtils.openStream(yamlFilePath)) {
-            validator.validate(stream);
+            validator.validate(stream, strictValidation);
         } catch (ValidationException | IOException e) {
             logError(yamlFilePath, e);
             failIfRequired(e);

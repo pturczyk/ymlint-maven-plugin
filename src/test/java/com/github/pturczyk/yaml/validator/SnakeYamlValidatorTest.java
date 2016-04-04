@@ -22,6 +22,9 @@ public class SnakeYamlValidatorTest {
             "valid.first: value\n" +
             "--- \n" +
             "invalid.yaml: '";
+    private static final String INVALID_YAML_DUPLICATES =
+            "valid.first: value\n" +
+            "valid.first: value\n";
 
     private SnakeYamlValidator validator = new SnakeYamlValidator();
 
@@ -34,7 +37,7 @@ public class SnakeYamlValidatorTest {
         Throwable caught = catchThrowable(new ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                validator.validate(stream);
+                validator.validate(stream, false);
             }
         });
 
@@ -51,12 +54,46 @@ public class SnakeYamlValidatorTest {
         Throwable caught = catchThrowable(new ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                validator.validate(stream);
+                validator.validate(stream, false);
             }
         });
 
         // then
         assertThat(caught).isInstanceOf(ValidationException.class);
+    }
+
+    @Test
+    public void testShouldFailYamlDuplicatesValidation() {
+        // given
+        final InputStream stream = getStream(INVALID_YAML_DUPLICATES);
+
+        // when
+        Throwable caught = catchThrowable(new ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                validator.validate(stream, true);
+            }
+        });
+
+        // then
+        assertThat(caught).isInstanceOf(ValidationException.class);
+    }
+
+    @Test
+    public void testShouldPassYamlDuplicatesNonStrictValidation() {
+        // given
+        final InputStream stream = getStream(INVALID_YAML_DUPLICATES);
+
+        // when
+        Throwable caught = catchThrowable(new ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                validator.validate(stream, false);
+            }
+        });
+
+        // then
+        assertThat(caught).isNull();
     }
 
     private InputStream getStream(String yaml) {

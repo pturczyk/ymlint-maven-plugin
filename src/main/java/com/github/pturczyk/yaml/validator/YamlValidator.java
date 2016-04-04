@@ -13,9 +13,10 @@ public interface YamlValidator {
      * Validates the provided yaml stream
      *
      * @param inputStream yaml stream
+     * @param strict set to true for strict duplicate checking
      *
      * @throws ValidationException   when validation fails
      * @throws IOException if any problem occurs while reading the input stream
      */
-    void validate(InputStream inputStream) throws ValidationException, IOException;
+    void validate(InputStream inputStream, boolean strict) throws ValidationException, IOException;
 }
