@@ -1,5 +1,6 @@
 package com.github.pturczyk.yaml.validator;
 
+import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.composer.Composer;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
 import org.yaml.snakeyaml.parser.ParserImpl;
@@ -21,18 +22,13 @@ import java.io.InputStream;
 public class SnakeYamlValidator implements YamlValidator {
 
     @Override
-    public void validate(InputStream yamlStream) throws ValidationException {
-        StreamReader streamReader = new StreamReader(new UnicodeReader(yamlStream));
-        Composer composer = new Composer(new ParserImpl(streamReader), new Resolver());
-        doValidate(composer);
-    }
+    public void validate(InputStream yamlStream, boolean strict) throws ValidationException {
 
-    private void doValidate(Composer composer) throws ValidationException {
         try {
-            // naive approach iterating over each document and parsing it
-            // if no exceptions are thrown document is considered valid
-            while (composer.checkNode()) {
-                composer.getNode();
+            if (strict) {
+                for (Object obj : new Yaml(new StrictMapAppenderConstructor()).loadAll(yamlStream)) {/*noop*/}
+            } else {
+                for (Object obj : new Yaml().loadAll(yamlStream)) {/*noop*/}
             }
         } catch (MarkedYAMLException exception) {
             throw new ValidationException(exception.getMessage(), exception);

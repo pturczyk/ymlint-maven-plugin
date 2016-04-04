@@ -49,13 +49,13 @@ public class YamlValidationMojoTest {
         given(fileUtils.openStream(anyString())).willReturn(mockedInputStream);
 
         ValidationException exception = new ValidationException("", null);
-        doThrow(exception).when(validator).validate(any(InputStream.class));
+        doThrow(exception).when(validator).validate(any(InputStream.class), anyBoolean());
 
         // when
         yamlValidationMojo.execute();
 
         // then
-        verify(validator, times(2)).validate(any(InputStream.class));
+        verify(validator, times(2)).validate(any(InputStream.class), anyBoolean());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class YamlValidationMojoTest {
         given(fileUtils.openStream(anyString())).willReturn(mockedInputStream);
 
         ValidationException exception = new ValidationException("", null);
-        doThrow(exception).when(validator).validate(any(InputStream.class));
+        doThrow(exception).when(validator).validate(any(InputStream.class), anyBoolean());
 
         Whitebox.setInternalState(yamlValidationMojo, "failOnError", true);
 
@@ -84,7 +84,7 @@ public class YamlValidationMojoTest {
 
         // then
         assertThat(caught).isInstanceOf(MojoFailureException.class).hasCauseInstanceOf(ValidationException.class);
-        verify(validator).validate(any(InputStream.class));
+        verify(validator).validate(any(InputStream.class), anyBoolean());
     }
 
 }
