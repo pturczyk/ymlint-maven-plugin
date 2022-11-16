@@ -1,8 +1,8 @@
-package com.github.pturczyk.yaml.mojo;
+package io.github.pturczyk.yaml.mojo;
 
-import com.github.pturczyk.yaml.util.YamlFileUtils;
-import com.github.pturczyk.yaml.validator.ValidationException;
-import com.github.pturczyk.yaml.validator.YamlValidator;
+import io.github.pturczyk.yaml.util.YamlFileUtils;
+import io.github.pturczyk.yaml.validator.ValidationException;
+import io.github.pturczyk.yaml.validator.YamlValidator;
 import org.apache.maven.plugin.MojoFailureException;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;

@@ -1,12 +1,7 @@
-package com.github.pturczyk.yaml.validator;
+package io.github.pturczyk.yaml.validator;
 
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.composer.Composer;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
-import org.yaml.snakeyaml.parser.ParserImpl;
-import org.yaml.snakeyaml.reader.StreamReader;
-import org.yaml.snakeyaml.reader.UnicodeReader;
-import org.yaml.snakeyaml.resolver.Resolver;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

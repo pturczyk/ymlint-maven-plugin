@@ -9,7 +9,7 @@ In order to enable the YAML file validation add the following section to your po
 
 ```xml
 <plugin>
-    <groupId>com.github.pturczyk</groupId>
+    <groupId>io.github.pturczyk</groupId>
     <artifactId>ymlint-maven-plugin</artifactId>
     <version>...</version>
     

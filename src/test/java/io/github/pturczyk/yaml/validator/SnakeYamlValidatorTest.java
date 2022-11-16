@@ -1,4 +1,4 @@
-package com.github.pturczyk.yaml.validator;
+package io.github.pturczyk.yaml.validator;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;

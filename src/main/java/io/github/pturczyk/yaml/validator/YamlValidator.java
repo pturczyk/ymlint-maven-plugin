@@ -1,4 +1,4 @@
-package com.github.pturczyk.yaml.validator;
+package io.github.pturczyk.yaml.validator;
 
 import java.io.IOException;
 import java.io.InputStream;

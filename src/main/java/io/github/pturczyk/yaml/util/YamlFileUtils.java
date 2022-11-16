@@ -1,4 +1,4 @@
-package com.github.pturczyk.yaml.util;
+package io.github.pturczyk.yaml.util;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

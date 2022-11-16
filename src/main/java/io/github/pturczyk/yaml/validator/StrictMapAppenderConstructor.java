@@ -1,4 +1,4 @@
-package com.github.pturczyk.yaml.validator;
+package io.github.pturczyk.yaml.validator;
 
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
