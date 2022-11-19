@@ -15,10 +15,6 @@ import java.util.Set;
  */
 public class StrictMapAppenderConstructor extends Constructor {
 
-    public StrictMapAppenderConstructor(Class<?> theRoot) {
-        super(theRoot);
-    }
-
     public StrictMapAppenderConstructor() {
         super();
     }
@@ -33,8 +29,8 @@ public class StrictMapAppenderConstructor extends Constructor {
     }
 
     @Override
-    protected Map<Object, Object> createDefaultMap() {
-        final Map<Object, Object> delegate = super.createDefaultMap();
+    protected Map<Object, Object> createDefaultMap(int initSize) {
+        final Map<Object, Object> delegate = super.createDefaultMap(initSize);
         return new AbstractMap<Object, Object>() {
             @Override
             public Object put(Object key, Object value) {

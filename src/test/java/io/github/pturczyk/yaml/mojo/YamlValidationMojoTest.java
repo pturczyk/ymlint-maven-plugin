@@ -38,8 +38,7 @@ public class YamlValidationMojoTest {
     private YamlValidationMojo yamlValidationMojo;
 
     @Test
-    void testExecutionShouldContinueOnFailure()
-            throws MojoFailureException, IOException, ValidationException {
+    void testExecutionShouldContinueOnFailure()  throws MojoFailureException, IOException, ValidationException {
 
         // given
         Set<String> yamlPaths = Sets.newSet("/path/file1.yml", "/path/file2.yml");
@@ -59,8 +58,7 @@ public class YamlValidationMojoTest {
     }
 
     @Test
-    void testExecutionShouldStopOnFailure()
-            throws MojoFailureException, IOException, ValidationException {
+    void testExecutionShouldStopOnFailure() throws IOException, ValidationException {
 
         // given
         Set<String> yamlPaths = Sets.newSet("/path/file1.yml", "/path/file2.yml");
