@@ -1,7 +1,7 @@
 package io.github.pturczyk.yaml.validator;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ public class SnakeYamlValidatorTest {
     private SnakeYamlValidator validator = new SnakeYamlValidator();
 
     @Test
-    public void testShouldPassYamlValidation() {
+    void testShouldPassYamlValidation() {
         // given
         final InputStream stream = getStream(VALID_YAML);
 
@@ -46,7 +46,7 @@ public class SnakeYamlValidatorTest {
     }
 
     @Test
-    public void testShouldFailYamlValidation() {
+    void testShouldFailYamlValidation() {
         // given
         final InputStream stream = getStream(INVALID_YAML);
 
@@ -63,7 +63,7 @@ public class SnakeYamlValidatorTest {
     }
 
     @Test
-    public void testShouldFailYamlDuplicatesValidation() {
+    void testShouldFailYamlDuplicatesValidation() {
         // given
         final InputStream stream = getStream(INVALID_YAML_DUPLICATES);
 
@@ -80,7 +80,7 @@ public class SnakeYamlValidatorTest {
     }
 
     @Test
-    public void testShouldPassYamlDuplicatesNonStrictValidation() {
+    void testShouldPassYamlDuplicatesNonStrictValidation() {
         // given
         final InputStream stream = getStream(INVALID_YAML_DUPLICATES);
 

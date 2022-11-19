@@ -5,27 +5,27 @@ import io.github.pturczyk.yaml.validator.ValidationException;
 import io.github.pturczyk.yaml.validator.YamlValidator;
 import org.apache.maven.plugin.MojoFailureException;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.internal.util.collections.Sets;
 import org.mockito.internal.util.reflection.Whitebox;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Mockito.*;
 
 /**
  * @author pturczyk@gmail.com
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class YamlValidationMojoTest {
 
     @Mock
@@ -38,7 +38,7 @@ public class YamlValidationMojoTest {
     private YamlValidationMojo yamlValidationMojo;
 
     @Test
-    public void testExecutionShouldContinueOnFailure()
+    void testExecutionShouldContinueOnFailure()
             throws MojoFailureException, IOException, ValidationException {
 
         // given
@@ -59,7 +59,7 @@ public class YamlValidationMojoTest {
     }
 
     @Test
-    public void testExecutionShouldStopOnFailure()
+    void testExecutionShouldStopOnFailure()
             throws MojoFailureException, IOException, ValidationException {
 
         // given
