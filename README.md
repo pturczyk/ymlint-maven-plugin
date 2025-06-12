@@ -16,9 +16,9 @@ In order to enable the YAML file validation add the following section to your po
     <configuration>
         <yamlPaths>
           <!-- include src/main/resources/configuration.yml --> 
-          <yamlPath>src/main/resources/configuration.yml</ymlPath>
+          <yamlPath>src/main/resources/configuration.yml</yamlPath>
           <!-- include all yaml files from src/test/resources directory and subdirectories -->
-          <yamlPath>src/test/resources</ymlPath> 
+          <yamlPath>src/test/resources</yamlPath> 
         </yamlPaths>
     </configuration>
     
